@@ -33,6 +33,7 @@ def about():
 @app.route('/create', methods= ['POST', 'GET'])
 def create():
     if request.method == "POST":
+
         title = request.form['title']
         price = request.form['price']
         text = request.form['text']
@@ -44,13 +45,14 @@ def create():
             db.session.commit()
             return redirect('/')
         except:
-            return "ПОЛУЧИЛАСЬ ОШИБКА"
+            return "RError"
     else:
         return render_template('create.html')
 
-@app.route('/', methods= ['POST', 'GET'])
+@app.route('/', methods= ['POST'])
 def delete():
-    if request.method == "GET":
+    if request.method == "POST":
+        id = request.form["item_id"]
         item = Item.query.get(id)
 
         try:
@@ -58,7 +60,7 @@ def delete():
             db.session.commit()
             return redirect('/')
         except:
-            return "ПОЛУЧИЛАСЬ ОШИБКА"
+            return "Error"
     else:
         return render_template('index.html')
 

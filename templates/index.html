@@ -12,22 +12,22 @@
 
 <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
     {% for el in data %}
-    <div class="col">
-      <div class="card mb-4 rounded-3 shadow-sm">
-        <div class="card-header py-3">
-          <h4 class="my-0 fw-normal">{{ el.title }}</h4>
-        </div>
-        <div class="card-body">
-          <h1 class="card-title pricing-card-title">{{ el.price }}<small class="text-muted fw-light">Рублей</small></h1>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>{{ el.text }}</li>
-          </ul>
-          <form method="post">
-          <button class="btn btn-success" class="from-control">удалить</button>
-        </form>
+    <form method="post" action="{{ url_for('delete') }}">
+      <input type = "hidden" name = "item_id" value = "{{ el.id }}" />
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">{{ el.title }}</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">{{ el.price }}<small class="text-muted fw-light">Рублей</small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>{{ el.text }}</li>
+            </ul>
+            <input class="btn btn-success from-control" type="submit" value="удалить"></input>
         </div>
       </div>
     </div>
-        
+   </form>
     {% endfor %}
 {% endblock %}
